@@ -1,22 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Type Ahead 👀</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <title>Type Ahead 👀</title>
+    <link rel="stylesheet" href="style.css"> </head>
+
 <body>
+    <form class="search-form">
+        <input type="text" class="search" placeholder="City or State">
+        <ul class="suggestions">
+            <li>Filter for a city</li>
+            <li>or a state</li>
+        </ul>
+    </form>
+    <script>
+        const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+       var cities = [];
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', endpoint, true);
+        xhr.send();
+        xhr.onreadystatechange = processRequest;
 
-  <form class="search-form">
-    <input type="text" class="search" placeholder="City or State">
-    <ul class="suggestions">
-      <li>Filter for a city</li>
-      <li>or a state</li>
-    </ul>
-  </form>
-<script>
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+        function processRequest(data) {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var data = JSON.parse(xhr.responseText);
+                cities = data;
+            }
+        }
+        //cities.filter(function (place) {
+        //    if (place.city = "Boston") {
+        //        return true
+        //    }
+        //  })
+        // function findWord(wordToMatch, cities) {
+        //   console.log(wordToMatch + cities)
+        //    cities.filter(function (place) {
+        //   var regexWordToMatch = new RegExp(wordToMatch, 'gi')
+        //   if (place.city.match(regexWordToMatch)) {
+        //         return true;
+        //    }
+        //  })
+        // }
+        
+    </script>
+</body>
 
-</script>
-  </body>
 </html>
